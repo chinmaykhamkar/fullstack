@@ -1,0 +1,42 @@
+.resultMain{
+    display:flex;
+    width:80%;    
+    padding:2rem;
+    background-color:blue;
+    /* flex-direction:column; */
+    flex-wrap:wrap;
+    align-content:flex-start;
+    overflow-y:auto
+    
+  
+
+}
+.card{
+    display:flex;
+    width:40%;
+    height:7rem;
+    background-color:orange;
+    margin-top:3rem;
+    /* padding-left:5rem; */
+    border-radius:10px;
+    margin-right:2rem
+
+    
+}
+.quizName{
+    display:flex;
+    width:60%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
+    /* background-color:purple */
+}
+.download{
+    display:flex;
+    width:40%;
+    height:100%;
+    /* background-color:brown; */
+    justify-content:center;
+    align-items:center
+
+}

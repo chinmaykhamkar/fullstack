@@ -1,0 +1,13 @@
+.name {
+    display: flex;
+    width: 100%;
+    /* background-color: green; */
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    font-weight: bold;
+    color: white;
+    padding:0.5rem
+
+  }
+ 

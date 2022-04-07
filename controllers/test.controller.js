@@ -47,7 +47,7 @@ exports.newTestController = async (req, res, next) => {
     console.log(index)
     for(i=0;i<index.length;i++){
         question = worksheet[`B${index[i]}`].v
-        // console.log(question)
+        // console.log(workbook)
         questions.push({question:question,answer:'None'})
     }
     console.log(questions)
