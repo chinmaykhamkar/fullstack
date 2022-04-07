@@ -9,12 +9,13 @@ const {testController,
 } = require('../controllers/test.controller')
 //page routes 
 
-router.route('/test').get(testController)
-router.route('/results').get(resultsController)
+router.route('/test/:id').get(testController) // done
+router.route('/results').get(resultsController) // done
+
 
 //curd routes 
-router.route('/newTest').post(newTestController)
-router.route('/submitTest').post(submitTestController)
-router.route('/downloadResult/:id').post(downloadResultController)
+router.route('/newTest').post(newTestController) //done
+router.route('/submitTest/:id').post(submitTestController) //done
+router.route('/downloadResult/:id').post(downloadResultController) 
 
 module.exports = router
