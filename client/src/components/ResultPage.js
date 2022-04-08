@@ -79,7 +79,7 @@ const ResultPage = () => {
         <div key={t._id} className="card">
             <div className="cardFrist">
                 <div className="quizName">{t.name}</div>
-                <div className="quizDuration">Duration : {t.duration>0?t.duration:1} mins</div>
+                <div style={{fontWeight:'bold'}} className="quizDuration">Duration : {t.duration>0?t.duration:1} mins</div>
             </div>
             <div className="download">   
                 {/* <CSVLink data={finalArr}>

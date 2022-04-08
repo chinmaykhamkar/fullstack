@@ -1,7 +1,7 @@
 .name {
     display: flex;
     width: 100%;
-    /* background-color: green; */
+    background-color: #1976D2;
     justify-content: center;
     align-items: center;
     font-size: xx-large;

@@ -17,7 +17,7 @@ const MainScreen = () => {
                     <PublicNav />
                 </div>
                 <div className="content">
-                    <div className="sideBar">
+                    <div className="sideBarr">
                         <div className="sideItem active">
                             Home
                         </div>

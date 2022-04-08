@@ -2,7 +2,7 @@
     display:flex;
     width:100%;    
     padding:2rem;
-    background-color:blue;
+    /* background-color:blue; */
     justify-content:center;
     align-content:center;
     /* flex-direction:column; */
@@ -17,11 +17,12 @@
     display:flex;
     width:40%;
     height:7rem;
-    background-color:orange;
+    background-color:white;
     margin-top:3rem;
     /* padding-left:5rem; */
     border-radius:10px;
-    margin-right:2rem
+    margin-right:2rem;
+    border:1px solid black;
     
 }
 .cardFrist{
@@ -31,7 +32,7 @@
     /* background-color:red; */
     justify-content:center;
     align-items:center;
-    flex-direction:column
+    flex-direction:column;
 }
 .quizName{
     display:flex;

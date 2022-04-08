@@ -1,7 +1,7 @@
 .mainRes{
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background-color: #FAFAFA;
     height: 100%;
     width: 100%;
 }
@@ -10,25 +10,26 @@
     display: flex;
     width: 100%;
     height: 10%;
-    background-color: orange;
+    /* background-color: orange; */
   }
 
 .content{
     display:flex;
     width:100%;
     height:100%;
-    background-color:green;
+    /* background-color:green; */
 }
 .sideBar{
     display:flex;
     width:10%;
     height:100%;
-    background-color:voilet;
+    background-color:white;
     /* justify-content:center; */
     flex-direction:column;
     align-items:center;
     font-size:x-large;
-    font-weight:bold
+    font-weight:bold;
+    border-right:1px solid black
 }
 .sideItem{
     border-bottom:2px solid;
@@ -36,19 +37,20 @@
     display:flex;
     justify-content:center;
     padding-top:5px;
-    padding-bottom:5px
+    padding-bottom:5px;
+
 
 }
 .link{
     text-decoration: none
 }
 .active{
-    background-color:red
+    background-color:#FFBCBC
 }
 .mainContent{
     display:flex;
     width:90%;
     height:100%;
-    background-color:grey;
+    /* background-color:grey; */
    
 }
