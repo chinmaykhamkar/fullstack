@@ -14,3 +14,7 @@ project setup
 -> Run npm install in root and client folder respectively
 
 -> add a .env file in root folder with following structure
+```
+MONGODB_URL={your mongodb uri}
+PORT=5000
+```
