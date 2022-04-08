@@ -38,7 +38,7 @@ exports.newTestController = async (req, res, next) => {
     // res.send({ response: "test controller" }).status(200);
     var temp = Date.now()%10
     var temp2 = Date.now()%100
-    var name = `test${temp}${temp2}`
+    var name = `test ${temp}${temp2}`
     index = []
     questions = []
     for(i=1;i<=10;i++){        
@@ -87,19 +87,7 @@ exports.downloadResultController = (req, res, next) => {
             for(i=0;i<test.questions.length;i++){
                 excelArr.push([test.questions[i].question,test.questions[i].answer])
             }
-            console.log(excelArr)
-            // wb.csv.writeFile('test.csv')
-            // .then(() => {
-            //     var headers = [
-            //         {header:'Question',key:'q',width:20},
-            //         {header:'Answer',key:'a',width:20}
-            //     ]
-            //     sheet.columns = headers
-            //     sheet.addRow(['a','q'])
-            //     sheet.addRow(['v','w'])
-            //     sheet.addRow(['d','r'])
-
-            // })
+            console.log(excelArr)           
             
             csv.write(excelArr,{headers:true})
             .pipe(ws);   

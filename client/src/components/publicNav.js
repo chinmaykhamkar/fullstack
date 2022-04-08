@@ -4,7 +4,7 @@ const PublicNav = () => {
     return (
         <React.Fragment>        
             <div className="name">
-                Quiz
+                MOLA
             </div>
         </React.Fragment>
 
