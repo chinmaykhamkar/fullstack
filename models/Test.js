@@ -5,8 +5,8 @@ const TestSchema = new mongoose.Schema({
         type:String        
     },
     duration:{
-        type:Date,
-        default:Date.now()
+        type:Number,
+        default:0
     },
     timestamp:{
         type:Date,

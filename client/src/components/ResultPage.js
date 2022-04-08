@@ -64,12 +64,12 @@ const ResultPage = () => {
 
     const testList = test.map((t) => {
         // console.log(t.duration)
-        const d = new Date(`${t.duration}`)
+        // const d = new Date(`${t.duration}`)
         // console.log(d.getMinutes())
-        const dur = d.getMinutes();
-        if(dur == 0){
-            dur = 1;
-        }
+        // const dur = t.duration
+        // if(dur == 0){
+        //     dur = 1;
+        // }
         const finalArr = [['Question','Answer']]
         for(let i=0;i<t.questions.length;i++){
             finalArr.push([t.questions[i].question,t.questions[i].answer])
@@ -79,7 +79,7 @@ const ResultPage = () => {
         <div key={t._id} className="card">
             <div className="cardFrist">
                 <div className="quizName">{t.name}</div>
-                <div className="quizDuration">Duration : {dur} mins</div>
+                <div className="quizDuration">Duration : {t.duration>0?t.duration:1} mins</div>
             </div>
             <div className="download">   
                 {/* <CSVLink data={finalArr}>

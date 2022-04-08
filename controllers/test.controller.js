@@ -68,7 +68,7 @@ exports.submitTestController = (req, res, next) => {
     // res.send({ response: "test controller" }).status(200);
     Test.findOne({"_id":req.params.id})
         .then(test => {
-            test.set({questions:req.body.question})
+            test.set({questions:req.body.question,duration:req.body.duration})
             test.save()
                 .then(test => res.status(200).json({
                     sucess:true,

@@ -3,7 +3,7 @@ import {  useState, useEffect } from 'react'
 import './HomeQuiz.css'
 import PublicNav from './publicNav'
 import axios from 'axios';
-
+import swal from 'sweetalert'
 import {ListGroup} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import Button from '@mui/material/Button';
@@ -18,7 +18,10 @@ import FormLabel from '@mui/material/FormLabel';
 // import Drawer from './Drawer'
 const que = []
 const itr = -1;
+const q = []
+
 const HomeQuiz = () => {
+    
     
     const[loading,setLoading] = useState(false)
     const[start,setStart] = useState(true)
@@ -32,7 +35,7 @@ const HomeQuiz = () => {
     const [q7, setq7] = React.useState('None');
     const [q8, setq8] = React.useState('None');
     const [q9, setq9] = React.useState('None');
-    const [q10, setq10] = React.useState();
+    const [q10, setq10] = React.useState('None');
     
     var s = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10]
     var ss = [setq1,setq2,setq3,setq4,setq5,setq6,setq7,setq8,setq9,setq10]
@@ -48,25 +51,73 @@ const HomeQuiz = () => {
 
     // const [gender, setGender] = React.useState();
 	// const [role, setRole] = React.useState();
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
 		e.preventDefault();
 		// const data = {gender, role};
         const data = {q1,q2,q3,q4,q5,q6,q7,q8,q9,q10}
-		const json = JSON.stringify(data, null, 4);
-		console.clear();
-		console.log(json);
+        var question = []
+
+        for(let i=0;i<q.length;i++){
+            question.push({
+                question:q[i].question,
+                answer:s[i]
+            })
+        }
+        
+        
+		// const json = JSON.stringify(question, null, 4);		
+		console.log(question);
+        try {
+            const id = localStorage.getItem("id");
+            const da = await axios.get(`http://localhost:5000/test/test/${id}`)
+            // console.log(da.data.data.)
+            const ti = da.data.data.timestamp
+            const te = new Date(`${ti}`)
+            const be = te.getMinutes()
+            const no = new Date().toISOString()
+            const tem = new Date(`${no}`)
+            const af = tem.getMinutes()
+            const duration = af - be            
+            console.log(duration)
+
+            try{
+                
+                const dat = await axios.post(
+                    `http://localhost:5000/test/submitTest/${id}`,
+                    {question,duration}
+                )
+                console.log(dat)
+                swal("Confirm Submit")
+                .then(() => {
+                    setQuiz(false)
+                    setStart(true)
+
+                })
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+
 	};
     
 
     const openQuiz = async () => {
+        localStorage.clear()
         setStart(false)
         setLoading(true)
-        
         try{
             const surveyData = await axios.post('http://localhost:5000/test/newTest')
-            console.log(surveyData.data.response)
+            console.log(surveyData.data.response)            
+            // id = surveyData.data.response._id
+            
+            localStorage.setItem("id", surveyData.data.response._id);
             for(let i=0;i<surveyData.data.response.questions.length;i++){
                 que.push([surveyData.data.response.questions[i],i])
+                q.push(surveyData.data.response.questions[i])
             }
             setTimeout(() => {
                 setQuiz(true)
@@ -135,146 +186,7 @@ const HomeQuiz = () => {
                 
                 <form className="homeiForm" onSubmit={handleSubmit}>
                     {queList}
-                    {/* <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={q1} setter={setq1}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={q1} setter={setq1} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={q1} setter={setq1}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={q1} setter={setq1} />
-                            <RadioInput label="Agree" value="Agree" checked={q1} setter={setq1}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={q1} setter={setq1} />
-                        </div>
-
-                    </div>
-                    <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={q2} setter={setq2}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={q2} setter={setq2} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={q2} setter={setq2}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={q2} setter={setq2} />
-                            <RadioInput label="Agree" value="Agree" checked={q2} setter={setq2}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={q2} setter={setq2} />
-                        </div>
-                        
-                    </div> */}
-                    {/* <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={gender} setter={setGender} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={gender} setter={setGender} />
-                            <RadioInput label="Agree" value="Agree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={gender} setter={setGender} />
-                        </div>
-                        
-                    </div>
-                    <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={gender} setter={setGender} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={gender} setter={setGender} />
-                            <RadioInput label="Agree" value="Agree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={gender} setter={setGender} />
-                        </div>
-                        
-                    </div>
-                    <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={gender} setter={setGender} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={gender} setter={setGender} />
-                            <RadioInput label="Agree" value="Agree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={gender} setter={setGender} />
-                        </div>
-                        
-                    </div>
-                    <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={gender} setter={setGender} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={gender} setter={setGender} />
-                            <RadioInput label="Agree" value="Agree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={gender} setter={setGender} />
-                        </div>
-                        
-                    </div>
-                    <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={gender} setter={setGender} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={gender} setter={setGender} />
-                            <RadioInput label="Agree" value="Agree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={gender} setter={setGender} />
-                        </div>
-                        
-                    </div>
-                    <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={gender} setter={setGender} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={gender} setter={setGender} />
-                            <RadioInput label="Agree" value="Agree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={gender} setter={setGender} />
-                        </div>
-                        
-                    </div>
-                    <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={gender} setter={setGender} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={gender} setter={setGender} />
-                            <RadioInput label="Agree" value="Agree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={gender} setter={setGender} />
-                        </div>
-                        
-                    </div>
-                    <div className="formMain">
-                        <div className="queName">
-                            <label>Caring for people who have suffered is an important virtue.</label>
-                        </div>
-                        <div className="options"> 
-                            <RadioInput label="Strongly Disagree" value="Strongly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Disagree" value="Disagree" checked={gender} setter={setGender} />
-                            <RadioInput label="Slightly Disagree" value="Slightly Disagree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Slightly Agree" value="Slightly Agree" checked={gender} setter={setGender} />
-                            <RadioInput label="Agree" value="Agree" checked={gender} setter={setGender}  />
-                            <RadioInput label="Strongly Agree" value="Strongly Agree" checked={gender} setter={setGender} />
-                        </div>
-                        
-                    </div> */}
+                    
                     <Button style={{width:'10%'}} variant="contained" type="submit">Submit</Button>
                 </form>
                     
