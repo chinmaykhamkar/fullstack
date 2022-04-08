@@ -24,27 +24,43 @@ Few screenshots below
     Home screen
   <img src="./screenshots/Capture.PNG">
   <br>
+  <br>
+
     Screen after user clicks on start, a new survey loads taking 10 random questions from excel sheet
   <img src="./screenshots/Capture1.PNG" >
     <br>
+      <br>
+
     Submit button
   <img src="./screenshots/Capture3.PNG">
     <br>
+      <br>
+
     Selecting options
   <img src="./screenshots/Capture4.PNG">
     <br>
+      <br>
+
     Click on submit which triggers confirm submit
   <img src="./screenshots/Capture5.PNG">
  Results page which displays all the surveys with duration and download link
   <br>
+    <br>
+
   <img src="./screenshots/Capture6.PNG" >
     <br>
+      <br>
+
     Action after clicking on download
   <img src="./screenshots/Capture7.PNG">
     <br>
+      <br>
+
     Excel Sheet with responses
   <img src="./screenshots/Capture8.PNG">
     <br>
+      <br>
+
     Mongodb database
   <img src="./screenshots/Capture9.PNG">
 
